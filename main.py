@@ -2,7 +2,6 @@ from pyrogram import Client, filters
 import aiohttp
 import os
 import asyncio
-import idle
 
 API_ENDPOINT = "http://152.42.164.96:8001/api/upscale"
 
@@ -40,10 +39,9 @@ async def upscale(client, message):
 
 async def main():
     await app.start()
-    print("started")
-    await idle()
+    print("Bot is running...")
+    await asyncio.Event().wait()
     await app.stop()
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+    asyncio.run(main())
