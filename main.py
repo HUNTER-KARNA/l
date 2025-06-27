@@ -11,13 +11,17 @@ API_HASH = "b7de0dfecd19375d3f84dbedaeb92537"
 
 app = Client("test", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
-@app.on_message(filters.photo & filters.private)
+@app.on_message(filters.command("upscale") & filters.reply)
 async def upscale(client, message):
-    print("Photo received")
+    reply = message.reply_to_message
+
+    if not reply.photo:
+        await message.reply_text("❌ Pehle kisi photo ko reply karke upscale likho.")
+        return
+
     downloading_msg = await message.reply_text("📤 Upscaling started...")
 
-    photo = message.photo.file_id
-    file_path = await client.download_media(photo)
+    file_path = await client.download_media(reply.photo.file_id)
 
     try:
         async with aiohttp.ClientSession() as session:
