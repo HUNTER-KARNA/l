@@ -13,6 +13,7 @@ app = Client("test", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
 @app.on_message(filters.photo & filters.private)
 async def upscale(client, message):
+    print("Photo received")
     downloading_msg = await message.reply_text("📤 Upscaling started...")
 
     photo = message.photo.file_id
