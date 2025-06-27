@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 import aiohttp
 import os
 import asyncio
+import idle
 
 API_ENDPOINT = "http://152.42.164.96:8001/api/upscale"
 
